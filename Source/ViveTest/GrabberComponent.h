@@ -3,6 +3,8 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "ViveController.h"
+
 #include "GrabberComponent.generated.h"
 
 
@@ -21,13 +23,11 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 	UFUNCTION(BlueprintCallable, Category = "Grab")
-		virtual void GrabOverlappingActor();
+		virtual void GrabOverlappingActor(AActor* Pointer);
 	UFUNCTION(BlueprintCallable, Category = "Grab")
 		virtual void ReleaseOverlappingActor();
 
 private:
-	FVector OffsetTranslation;
-	FRotator OffsetRotation;
 	AActor* GrabbedActor = nullptr;
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	

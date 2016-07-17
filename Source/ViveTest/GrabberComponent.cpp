@@ -38,62 +38,38 @@ void UGrabberComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-	if (GrabbedActor && false) {
-		//Get parent location
-		FVector OwnerTranslation = GetOwner()->GetActorLocation();
-		FRotator OwnerRotation = GetOwner()->GetActorRotation();
-		GrabbedActor->SetActorLocation(OwnerTranslation + OffsetTranslation);
-		GrabbedActor->SetActorRotation(OwnerRotation + OffsetRotation);
-
-
-		//Set transform with offset to make the grabbed actor move with the parent component.
-	}
 }
 
-void UGrabberComponent::GrabOverlappingActor()
+void UGrabberComponent::GrabOverlappingActor(AActor* Pointer)
 {
-	if (PhysicsHandle == nullptr) {
+	if (PhysicsHandle == nullptr || Pointer == nullptr) {
 		return;
 	}
 	TArray<AActor*> OverlappingActors;
-	TSubclassOf<AActor> Filter;
-
-	TArray<UChildActorComponent*> comps;
-
-	GetOwner()->GetComponents(comps);
-	UChildActorComponent* Controller = nullptr;
-	for (auto ChildActorComponent: comps) {
-		if (ChildActorComponent->GetChildActorName().ToString().StartsWith("ViveController")) {
-			Controller = ChildActorComponent;
-		}
-	}
-
-	
-	Controller->GetChildActor()->GetOverlappingActors(OUT OverlappingActors);
+	Pointer->GetOverlappingActors(OUT OverlappingActors);
 	///If nothing is overlapping then simply return.
 
 	if (OverlappingActors.Num() == 0) {
 		return;
 	}
-
-	GrabbedActor = OverlappingActors[0];
-	GrabbedActor->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
-	FTransform OwnerTransform = GetOwner()->GetActorTransform();
-	FTransform OtherActorTransform = GrabbedActor->GetActorTransform();
-
-	UPrimitiveComponent* ComponentToGrab = GrabbedActor->GetRootPrimitiveComponent();
-	FVector PointerLocation = Controller->GetChildActor()->GetActorLocation();
-	PhysicsHandle->GrabComponent(ComponentToGrab, NAME_None, PointerLocation, true);
-	OffsetTranslation = FVector(OtherActorTransform.GetLocation() - OwnerTransform.GetLocation());
-	OffsetRotation = FRotator(OtherActorTransform.GetRotation() - OwnerTransform.GetRotation());
+	
+	for (AActor* actor : OverlappingActors) {
+		if (!(actor->IsA(AViveController::StaticClass()))) {
+			GrabbedActor = OverlappingActors[0];
+			break;
+		}
+	}
+	if (GrabbedActor != nullptr) {
+		GrabbedActor->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
+	}
+	//Get pointer: Controller->GetChildActor()
 }
 
 void UGrabberComponent::ReleaseOverlappingActor()
 {
-	if (PhysicsHandle == nullptr) {
+	if (PhysicsHandle == nullptr || GrabbedActor == nullptr) {
 		return;
 	}
 	GrabbedActor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	PhysicsHandle->ReleaseComponent();
 	GrabbedActor = nullptr;
 }
