@@ -151,13 +151,15 @@ public class ViveTest : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "vtkViewsCore-7.0.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "vtkViewsInfovis-7.0.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "vtkzlib-7.0.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "vtkxdmf3.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "XdmfCore.lib"));
 
         }
 
         if (isLibrarySupported)
         {
             // Include path
-            PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "include", "vtk-7.0"));
+            PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "VTK", "include", "vtk-7.0"));
         }
 
         Definitions.Add(string.Format("UsingVTK={0}", isLibrarySupported ? 1 : 0));

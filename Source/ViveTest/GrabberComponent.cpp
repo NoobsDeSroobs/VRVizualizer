@@ -55,7 +55,7 @@ void UGrabberComponent::GrabOverlappingActor(AActor* Pointer)
 	
 	for (AActor* actor : OverlappingActors) {
 		if (!(actor->IsA(AViveController::StaticClass()))) {
-			GrabbedActor = OverlappingActors[0];
+			GrabbedActor = actor;
 			break;
 		}
 	}

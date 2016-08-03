@@ -4,12 +4,25 @@
 
 
 #include "GameFramework/Actor.h"
+#include <vector>
 #include "VTKVolumeActor.generated.h"
 
 UCLASS()
 class VIVETEST_API AVTKVolumeActor : public AActor
 {
 	GENERATED_BODY()
+
+		struct color
+	{
+		int r, g, b, a;
+		color()
+		{
+			r = 0;
+			g = 0;
+			b = 0;
+			a = 0;
+		}
+	};
 	
 public:	
 	// Sets default values for this actor's properties
@@ -21,6 +34,12 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
+	UFUNCTION(BlueprintCallable, Category = "VTK")
+		void Render();
+
+	std::vector<AActor*> volume;
+	UWorld* World;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Voxel")
+		TSubclassOf<class AActor> MyItemBlueprint;
 	
 };
