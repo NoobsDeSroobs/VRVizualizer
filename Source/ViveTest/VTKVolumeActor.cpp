@@ -19,7 +19,6 @@ void AVTKVolumeActor::BeginPlay()
 {
 	Super::BeginPlay();
 	World = GetWorld();
-	UE_LOG(LogTemp, Warning, TEXT("Starting begin play.\n"));
 
 	if (World) {
 		int ctr = 0;
@@ -51,7 +50,6 @@ void AVTKVolumeActor::BeginPlay()
 							DynamicMaterial->SetScalarParameterValue("Alpha", 0.1);
 						}
 						Components[0]->SetMaterial(0, DynamicMaterial);
-						UE_LOG(LogTemp, Warning, TEXT("Ending begin play.\n"));
 					}
 
 					ctr++;
