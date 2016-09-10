@@ -154,12 +154,19 @@ public class ViveTest : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "vtkxdmf3.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "XdmfCore.lib"));
 
+
+            string OpenGLPath = Path.Combine(ThirdPartyPath, "glew", "lib", "Release", "x64");
+            PublicAdditionalLibraries.Add(Path.Combine(OpenGLPath, "glew32.lib"));
+
+
         }
 
         if (isLibrarySupported)
         {
             // Include path
             PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "VTK", "include", "vtk-7.0"));
+            PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "glm"));
+            PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "glew", "include"));
         }
 
         Definitions.Add(string.Format("UsingVTK={0}", isLibrarySupported ? 1 : 0));

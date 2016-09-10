@@ -5,6 +5,7 @@
 
 #include "GameFramework/Actor.h"
 #include <vector>
+#include "VTKRenderingThread.h"
 #include "VTKVolumeActor.generated.h"
 
 UCLASS()

@@ -18,51 +18,55 @@ AVTKVolumeActor::AVTKVolumeActor()
 void AVTKVolumeActor::BeginPlay()
 {
 	Super::BeginPlay();
-	World = GetWorld();
+	//World = GetWorld();
 
-	if (World) {
-		int ctr = 0;
-		for (int z = -50; z < 50; z+=10) {
-			for (int y = -50; y < 50; y += 10) {
-				for (int x = -50; x < 50; x += 10) {
-					FVector loc = GetActorLocation();
-					loc.X += x+5;
-					loc.Y += y+5;
-					loc.Z += z+5;
-					volume.push_back(World->SpawnActor<AActor>(MyItemBlueprint, loc, GetActorRotation()));
-					volume[ctr]->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-					volume[ctr]->SetActorScale3D(FVector(0.1, 0.1, 0.1));
-					TArray<UStaticMeshComponent*> Components;
-					volume[ctr]->GetComponents<UStaticMeshComponent>(Components);
-					if (Components[0]->GetName().Compare("Cube") == 0) {
-						UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(Components[0]->GetMaterial(0), this);
-						/*FVector xvec(x, 0, 0);
-						FVector yvec(y, 0, 0);
-						FVector zvec(z, 0, 0);
-						float xCol = FMath::Lerp<float, float>(1, 0, xvec.Size() / 50);
-						float yCol = FMath::Lerp<float, float>(1, 0, yvec.Size() / 50);
-						float zCol = FMath::Lerp<float, float>(1, 0, zvec.Size() / 50);*/
-						if (FMath::Abs(x) < 20 && FMath::Abs(y) < 20 && FMath::Abs(z) < 20) {
-							DynamicMaterial->SetVectorParameterValue("Color", FVector(1, 0, 0));
-							DynamicMaterial->SetScalarParameterValue("Alpha", 0.8);
-						} else {
-							DynamicMaterial->SetVectorParameterValue("Color", FVector(0, 1, 0));
-							DynamicMaterial->SetScalarParameterValue("Alpha", 0.1);
-						}
-						Components[0]->SetMaterial(0, DynamicMaterial);
-					}
+	//if (World) {
+	//	int ctr = 0;
+	//	for (int z = -50; z < 50; z+=10) {
+	//		for (int y = -50; y < 50; y += 10) {
+	//			for (int x = -50; x < 50; x += 10) {
+	//				FVector loc = GetActorLocation();
+	//				loc.X += x+5;
+	//				loc.Y += y+5;
+	//				loc.Z += z+5;
+	//				volume.push_back(World->SpawnActor<AActor>(MyItemBlueprint, loc, GetActorRotation()));
+	//				volume[ctr]->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+	//				volume[ctr]->SetActorScale3D(FVector(0.1, 0.1, 0.1));
+	//				TArray<UStaticMeshComponent*> Components;
+	//				volume[ctr]->GetComponents<UStaticMeshComponent>(Components);
+	//				if (Components[0]->GetName().Compare("Cube") == 0) {
+	//					UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(Components[0]->GetMaterial(0), this);
+	//					/*FVector xvec(x, 0, 0);
+	//					FVector yvec(y, 0, 0);
+	//					FVector zvec(z, 0, 0);
+	//					float xCol = FMath::Lerp<float, float>(1, 0, xvec.Size() / 50);
+	//					float yCol = FMath::Lerp<float, float>(1, 0, yvec.Size() / 50);
+	//					float zCol = FMath::Lerp<float, float>(1, 0, zvec.Size() / 50);*/
+	//					if (FMath::Abs(x) < 20 && FMath::Abs(y) < 20 && FMath::Abs(z) < 20) {
+	//						DynamicMaterial->SetVectorParameterValue("Color", FVector(1, 0, 0));
+	//						DynamicMaterial->SetScalarParameterValue("Alpha", 0.8);
+	//					} else {
+	//						DynamicMaterial->SetVectorParameterValue("Color", FVector(0, 1, 0));
+	//						DynamicMaterial->SetScalarParameterValue("Alpha", 0.1);
+	//					}
+	//					Components[0]->SetMaterial(0, DynamicMaterial);
+	//				}
 
-					ctr++;
-				}
-			}
-		}
-	}
+	//				ctr++;
+	//			}
+	//		}
+	//	}
+	//}
 
 }
 
 void AVTKVolumeActor::Render()
 {
 
+
+	//VTKRenderingThread* RT = VTKRenderingThread::StaticInit();
+	//RT->Run();
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Called the thread. ");
 
 
 }
