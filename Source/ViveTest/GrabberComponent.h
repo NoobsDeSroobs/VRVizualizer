@@ -4,6 +4,7 @@
 
 #include "Components/ActorComponent.h"
 #include "ViveController.h"
+#include "Grabbable.h"
 
 #include "GrabberComponent.generated.h"
 
@@ -28,7 +29,7 @@ public:
 		virtual void ReleaseOverlappingActor();
 
 private:
-	AActor* GrabbedActor = nullptr;
+	AGrabbable* GrabbedActor = nullptr;
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
-	
+	int GrabberID;
 };

@@ -12,8 +12,8 @@ UGrabberComponent::UGrabberComponent()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-
-
+	GrabberID = -1;
+	GrabbedActor = nullptr;
 }
 
 
@@ -42,9 +42,11 @@ void UGrabberComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 
 void UGrabberComponent::GrabOverlappingActor(AActor* Pointer)
 {
-	if (PhysicsHandle == nullptr || Pointer == nullptr) {
+	if (PhysicsHandle == nullptr || Pointer == nullptr ) {
 		return;
 	}
+
+
 	TArray<AActor*> OverlappingActors;
 	Pointer->GetOverlappingActors(OUT OverlappingActors);
 	///If nothing is overlapping then simply return.
@@ -54,12 +56,19 @@ void UGrabberComponent::GrabOverlappingActor(AActor* Pointer)
 	}
 	
 	for (AActor* actor : OverlappingActors) {
-		if (!(actor->IsA(AViveController::StaticClass()))) {
-			GrabbedActor = actor;
+		if (actor->IsA(AGrabbable::StaticClass())) {
+			GrabbedActor = Cast<AGrabbable>(actor);
+			GrabberID = GrabbedActor->RegisterGrabber(GetOwner());
 			break;
 		}
 	}
-	if (GrabbedActor != nullptr) {
+
+	if (GrabberID == -1)
+	{
+		GrabbedActor = nullptr;
+	}
+
+	if (GrabbedActor != nullptr && GrabberID == 0) {
 		GrabbedActor->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
 	}
 	//Get pointer: Controller->GetChildActor()
@@ -70,6 +79,11 @@ void UGrabberComponent::ReleaseOverlappingActor()
 	if (PhysicsHandle == nullptr || GrabbedActor == nullptr) {
 		return;
 	}
-	GrabbedActor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	GrabbedActor->UnregisterGrabber(GrabberID);
+	if (GrabberID == 0)
+	{
+		GrabbedActor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	}
+	GrabberID = -1;
 	GrabbedActor = nullptr;
 }
