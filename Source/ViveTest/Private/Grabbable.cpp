@@ -49,6 +49,7 @@ void AGrabbable::UpdateData()
 	float Multiplier = NewDistance / InitialDistance;
 	FVector NewScale = InitialScale * Multiplier;
 	SetActorScale3D(NewScale);
+	SetActorLocation(ScalingActor->GetActorLocation() + (VecBetweenActors/2));
 }
 
 int AGrabbable::RegisterGrabber(AActor* Actor)
