@@ -24,9 +24,11 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 	UFUNCTION(BlueprintCallable, Category = "Grab")
-		virtual void GrabOverlappingActor(AActor* Pointer);
+		virtual void GrabOverlappingActor(AActor* VRPointer);
 	UFUNCTION(BlueprintCallable, Category = "Grab")
 		virtual void ReleaseOverlappingActor();
+	UFUNCTION(BlueprintCallable, Category = "Overlap")
+		virtual TArray <AActor*> GetOverlappingActors(AActor* VRPointer);
 
 private:
 	AGrabbable* GrabbedActor = nullptr;

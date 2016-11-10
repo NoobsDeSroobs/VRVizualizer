@@ -40,15 +40,15 @@ void UGrabberComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 
 }
 
-void UGrabberComponent::GrabOverlappingActor(AActor* Pointer)
+void UGrabberComponent::GrabOverlappingActor(AActor* VRPointer)
 {
-	if (PhysicsHandle == nullptr || Pointer == nullptr ) {
+	if (PhysicsHandle == nullptr || VRPointer == nullptr ) {
 		return;
 	}
 
 
 	TArray<AActor*> OverlappingActors;
-	Pointer->GetOverlappingActors(OUT OverlappingActors);
+	VRPointer->GetOverlappingActors(OUT OverlappingActors);
 	///If nothing is overlapping then simply return.
 
 	if (OverlappingActors.Num() == 0) {
@@ -86,4 +86,11 @@ void UGrabberComponent::ReleaseOverlappingActor()
 	}
 	GrabberID = -1;
 	GrabbedActor = nullptr;
+}
+
+TArray<AActor*> UGrabberComponent::GetOverlappingActors(AActor* VRPointer)
+{
+	TArray<AActor*> OverlappingActors;
+	VRPointer->GetOverlappingActors(OUT OverlappingActors);
+	return OverlappingActors;
 }
