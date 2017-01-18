@@ -55,14 +55,33 @@ void UGrabberComponent::GrabOverlappingActor(AActor* VRPointer)
 		return;
 	}
 	
-	for (AActor* actor : OverlappingActors) {
-		if (actor->IsA(AGrabbable::StaticClass())) {
+	int32 HighestPriority = -1;
+
+	for (AActor* actor : OverlappingActors)
+	{
+		if (actor->IsA(AGrabbable::StaticClass()))
+		{
 			GrabbedActor = Cast<AGrabbable>(actor);
-			GrabberID = GrabbedActor->RegisterGrabber(GetOwner());
-			break;
+			if(GrabbedActor->GetPriority() > HighestPriority) {
+				HighestPriority = GrabbedActor->GetPriority();
+			}
 		}
 	}
 
+	for (AActor* actor : OverlappingActors) {
+		if (actor->IsA(AGrabbable::StaticClass())) {
+			GrabbedActor = Cast<AGrabbable>(actor);
+			if (GrabbedActor->GetPriority() == HighestPriority)
+			{
+				GrabberID = GrabbedActor->RegisterGrabber(GetOwner());
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Breaking"));
+				break;
+			}
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke 1"));
+		}
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke 2"));
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke out!"));
 	if (GrabberID == -1)
 	{
 		GrabbedActor = nullptr;

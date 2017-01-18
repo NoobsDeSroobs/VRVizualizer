@@ -13,6 +13,7 @@ AGrabbable::AGrabbable()
 	InitialDistance = 0;
 	GrabbingActor = nullptr;
 	ScalingActor = nullptr;
+	GrabberPriority = 2;
 	
 }
 
@@ -49,7 +50,7 @@ void AGrabbable::UpdateData()
 	float Multiplier = NewDistance / InitialDistance;
 	FVector NewScale = InitialScale * Multiplier;
 	SetActorScale3D(NewScale);
-	SetActorLocation(ScalingActor->GetActorLocation() + (VecBetweenActors/2));
+	//SetActorLocation(ScalingActor->GetActorLocation() + (VecBetweenActors/2));
 }
 
 int AGrabbable::RegisterGrabber(AActor* Actor)
@@ -97,4 +98,15 @@ bool AGrabbable::UnregisterGrabber(int ActorID) {
 		return false;
 		break;
 	}
+}
+
+
+void AGrabbable::SetPriority(int32 priority)
+{
+	GrabberPriority = priority;
+}
+
+int AGrabbable::GetPriority()
+{
+	return GrabberPriority;
 }
