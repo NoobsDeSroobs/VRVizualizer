@@ -77,11 +77,8 @@ void UGrabberComponent::GrabOverlappingActor(AActor* VRPointer)
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Breaking"));
 				break;
 			}
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke 1"));
 		}
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke 2"));
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Broke out!"));
 	if (GrabberID == -1)
 	{
 		GrabbedActor = nullptr;
