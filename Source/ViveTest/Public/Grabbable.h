@@ -31,6 +31,8 @@ public:
 	FVector InitialScale;
 	//The initial distance is also used to control the scaling as the scale is increased based on the distance difference.
 	float InitialDistance;
+	//The initial vector from the grabber to the actor center.
+	FVector InitialVecToTargetCenter;
 	/** The priority allows for grabbing an object inside other objects. The grabber component has an increasing priority with an increasing value. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grab)
 	int32 GrabberPriority;
