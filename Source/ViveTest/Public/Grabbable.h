@@ -33,6 +33,8 @@ public:
 	float InitialDistance;
 	//The initial vector from the grabber to the actor center.
 	FVector InitialVecToTargetCenter;
+	//The initial vector from the grabber to the actor center.
+	FRotator InitialTargetRotation;
 	/** The priority allows for grabbing an object inside other objects. The grabber component has an increasing priority with an increasing value. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grab)
 	int32 GrabberPriority;

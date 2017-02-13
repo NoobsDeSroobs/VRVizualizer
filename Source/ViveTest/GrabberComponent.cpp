@@ -74,7 +74,6 @@ void UGrabberComponent::GrabOverlappingActor(AActor* VRPointer)
 			if (GrabbedActor->GetPriority() == HighestPriority)
 			{
 				GrabberID = GrabbedActor->RegisterGrabber(GetOwner());
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Breaking"));
 				break;
 			}
 		}

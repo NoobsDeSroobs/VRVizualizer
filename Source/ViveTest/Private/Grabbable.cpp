@@ -45,6 +45,7 @@ void AGrabbable::UpdateData()
 		InitialScale = GetActorScale();
 		InitialDistance = fabs((GrabbingActor->GetActorLocation() - ScalingActor->GetActorLocation()).Size());
 		InitialVecToTargetCenter = GetActorLocation() - GrabbingActor->GetActorLocation();
+		InitialTargetRotation = GetActorRotation();
 	}
 	FVector VecBetweenActors = GrabbingActor->GetActorLocation() - ScalingActor->GetActorLocation();
 	float NewDistance = fabs(VecBetweenActors.Size());
@@ -52,6 +53,7 @@ void AGrabbable::UpdateData()
 	FVector NewScale = InitialScale * Multiplier;
 	SetActorScale3D(NewScale);
 	SetActorLocation(GrabbingActor->GetActorLocation() + (InitialVecToTargetCenter * Multiplier));
+	SetActorRotation(InitialTargetRotation);
 	//SetActorLocation(ScalingActor->GetActorLocation() + (VecBetweenActors/2));
 }
 
