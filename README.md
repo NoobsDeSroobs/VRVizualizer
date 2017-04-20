@@ -15,9 +15,9 @@ In order to build this project yourself you need to do 5 things.
 
 5. Build the VS project and then launch the game using the .uproject file.
 
-6. Download the backbone model here: https://dl.dropboxusercontent.com/u/22439677/VRVisualiser/Chromo.uasset Add the asset to Content/Chromosome/Wired/
+6. In the folder "Additional files" there is a zip file called "Chromo.zip". Add the extracted asset to Content/Chromosome/Wired/
 
-7. Download the shader code: https://dl.dropboxusercontent.com/u/22439677/VRVisualiser/Common.usf Overwrite the following file: <YOUR_ENGINE_FOLDER>/Engine/Shaders/ 
+7. In the folder "Additional files" there is a file called "Common.usf". Overwrite the following file: <YOUR_ENGINE_FOLDER>/Engine/Shaders/ 
 
 If there is a desire for it I can add the binaries for the C++ code that is included and avoid step 2, 4 and 5.
 
