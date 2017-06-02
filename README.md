@@ -5,7 +5,7 @@ To use the project you need a VR ready PC and a VR headset with room scale suppo
 
 In order to build this project yourself you need to do 5 things.
 
-1. You need UE4.14 which you can download from their launcher: https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
+1. You need UE4.16 which you can download from their launcher: https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
 
 2. You need Visual Studio community 2015: https://go.microsoft.com/fwlink/?LinkId=691978&clcid=0x409 Remember to install the C++ module.
 
