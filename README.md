@@ -22,7 +22,7 @@ In order to build this project yourself you need to do 5 things.
 If there is a desire for it I can add the binaries for the C++ code that is included and avoid step 2, 4 and 5.
 
 Demos contained within the project:
- - Rat Brain - A model of some of the major parts of a rat brain. You can pick up and interact with the model. You can customize the model through a menu in the scene.
+ - Rat Brain - A model of some of the major parts of a rat brain. You can pick up and interact with the model. You can customize the model through a menu in the scene. Based on the Waxholm space rat atlas v2.0 by Papp, E. A., Leergaard, T. B., Calabrese, E., Johnson, G. A., & Bjaalie, J. G. (2014). Waxholm Space atlas of the Sprague Dawley rat brain. NeuroImage, 97, 374-386.
  ![BrainDemo](Images/RatModelWithMenuExample.jpg)
 
  - Genome - The genome demo has two models. One has colour coded chromosomes where each domain is represented as a sphere. The other model is colour coded as well, but it shows you the backbone of the chromosomes.
