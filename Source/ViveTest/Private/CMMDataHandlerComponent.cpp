@@ -27,6 +27,9 @@ void UCMMDataHandlerComponent::BeginPlay()
 
 int UCMMDataHandlerComponent::ReadCMMFile(FString FilePath)
 {
+
+	float CMMToUE4Scale = 100;
+
 	FFileHelper::LoadANSITextFileToStrings(*FilePath, nullptr, FileStrings);
 	//TADStructs.(FileStrings.Num()-2);
 	int numTADs = 0;
@@ -44,17 +47,17 @@ int UCMMDataHandlerComponent::ReadCMMFile(FString FilePath)
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
 			//X
-			CurrentTADStruct.Position.X = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1));
+			CurrentTADStruct.Position.X = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1)) * CMMToUE4Scale;
 
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
 			//Y
-			CurrentTADStruct.Position.Y = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1));
+			CurrentTADStruct.Position.Y = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1)) * CMMToUE4Scale;
 
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
 			//Z
-			CurrentTADStruct.Position.Z = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1));
+			CurrentTADStruct.Position.Z = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1)) * CMMToUE4Scale;
 
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
@@ -64,8 +67,7 @@ int UCMMDataHandlerComponent::ReadCMMFile(FString FilePath)
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
 			//R
-			FString test = UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1);
-			CurrentTADStruct.Colour.R = FCString::Atof(*test);
+			CurrentTADStruct.Colour.R = FCString::Atof(*UKismetStringLibrary::GetSubstring(CurrentTAD, CurrentStartIndex + 1, CurrentEndIndex - CurrentStartIndex - 1));
 
 			CurrentStartIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentEndIndex + 1);
 			CurrentEndIndex = UKismetStringLibrary::FindSubstring(CurrentTAD, "\"", false, false, CurrentStartIndex + 1);
@@ -110,4 +112,27 @@ TArray<FString> UCMMDataHandlerComponent::GetChromosomeIDs()
 	TArray<FString> Keys;
 	TADStructs.GetKeys(Keys);
 	return Keys;
+}
+
+FTopologicallyAssociatedDomain UCMMDataHandlerComponent::GetTADData(FVector WorldPosition)
+{
+
+	FRotator rot = GetOwner()->GetActorRotation();
+	rot = rot.GetInverse();
+	FVector RelativePosition = WorldPosition - GetOwner()->GetActorLocation();
+	RelativePosition = rot.RotateVector(RelativePosition);
+	RelativePosition = RelativePosition / GetOwner()->GetActorScale(); //Maybe change this to actorscale3d
+	int32 numChecked = 0;
+	for (TPair<FString, TArray<FTopologicallyAssociatedDomain>> TADPair : TADStructs) {
+		TArray<FTopologicallyAssociatedDomain> Chromosome = TADPair.Value;
+		for (FTopologicallyAssociatedDomain TAD : Chromosome) {
+			numChecked++;
+			if(abs((TAD.Position-RelativePosition).Size()) <= TAD.Scale*100) {
+				return TAD;
+			}
+		}
+	}
+	FTopologicallyAssociatedDomain ret = FTopologicallyAssociatedDomain();
+	ret.UniqueID = numChecked;
+	return ret;
 }

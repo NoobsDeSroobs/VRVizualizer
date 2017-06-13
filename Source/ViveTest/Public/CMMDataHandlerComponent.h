@@ -12,17 +12,17 @@ struct VIVETEST_API FTopologicallyAssociatedDomain
 {
 	GENERATED_BODY()
 		//<marker id="0" x="-2.17566"  y="0.471581" z="1.44219" radius="0.208368" r="0.191519" g="0.497664" b="0.622109" chrID="chr10_A" beadID="chr10_A:0-2930000"/>
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	int32 UniqueID;
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	FVector Position;
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	float Scale;
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	FLinearColor Colour;
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	FString TADID;
-	UPROPERTY(BlueprintReadWrite, Category = "TAD")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TAD")
 	FString ChrID;
 
 /*
@@ -87,6 +87,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "DataHandling")
 		TArray<FString> GetChromosomeIDs();
+
+	UFUNCTION(BlueprintCallable, Category = "DataHandling")
+		FTopologicallyAssociatedDomain	 GetTADData(FVector WorldPosition);
 
 };
 
