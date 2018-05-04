@@ -41,4 +41,6 @@ You move by walking around or by teleporting. The right controller allows you to
 
 For any inquiries or questions or feedback, please send an email to magnus_elden (at) hotmail.com with the title containing [VR Visualiser].
 
+I have gotten som time on my hands now, so for any feature requests, please send an email to magnus_elden (at) hotmail.com with the title containing [VR Visualiser Request]. I know how to program, I just dont have any imagination. (^.^)
+
 Hope you enjoy it.
