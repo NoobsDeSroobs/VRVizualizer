@@ -5,21 +5,13 @@ using System.Collections.Generic;
 
 public class ViveTestTarget : TargetRules
 {
-	public ViveTestTarget(TargetInfo Target)
-	{
+	public ViveTestTarget(TargetInfo Target) : base(Target)
+    {
 		Type = TargetType.Game;
+        ExtraModuleNames.Add("ViveTest");
 	}
 
 	//
 	// TargetRules interface.
 	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "ViveTest" } );
-	}
 }

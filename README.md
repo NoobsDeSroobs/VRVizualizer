@@ -5,7 +5,7 @@ To use the project you need a VR ready PC and a VR headset with room scale suppo
 
 In order to build this project yourself you need to do 5 things.
 
-1. You need UE4.16 which you can download from their launcher: https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
+1. You need UE4.19 which you can download from their launcher: https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
 
 2. You need Visual Studio community 2015: https://go.microsoft.com/fwlink/?LinkId=691978&clcid=0x409 Remember to install the C++ module.
 
@@ -16,8 +16,6 @@ In order to build this project yourself you need to do 5 things.
 5. Build the VS project and then launch the game using the .uproject file.
 
 6. In the folder "Additional files" there is a zip file called "Chromo.zip". Add the extracted asset to Content/Chromosome/Wired/
-
-7. In the folder "Additional files" there is a file called "Common.usf". Overwrite the following file: <YOUR_ENGINE_FOLDER>/Engine/Shaders/ 
 
 If there is a desire for it I can add the binaries for the C++ code that is included and avoid step 2, 4 and 5.
 
@@ -38,6 +36,9 @@ What functionality this visualizer has:
 Most models support being picked up, rotated, translated, scaled and cut. Geometric components can be highlighted. Distances can be measured. Geometric component names can be extracted. 
 
 You move by walking around or by teleporting. The right controller allows you to grab and scale as well as teleport and spawn the cutting plane. The left controller allows you to grab and scale the model as well as measure distance inside the genome demo and extract intersecting component names. Most interactions are model specific and are accessible through a 3D menu in the scene. 
+
+The plugin is not made by me and is only used for testing and showcasing the viability of certain technologies for scientific visualizations. Original source from: https://github.com/sp0lsh/UEShaderBits-GDC-Pack
+
 
 For any inquiries or questions or feedback, please send an email to magnus_elden (at) hotmail.com with the title containing [VR Visualiser].
 

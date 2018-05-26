@@ -5,21 +5,14 @@ using System.Collections.Generic;
 
 public class ViveTestEditorTarget : TargetRules
 {
-	public ViveTestEditorTarget(TargetInfo Target)
+	public ViveTestEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-	}
+        ExtraModuleNames.Add("ViveTest");
+    }
 
 	//
 	// TargetRules interface.
 	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "ViveTest" } );
-	}
+    
 }
