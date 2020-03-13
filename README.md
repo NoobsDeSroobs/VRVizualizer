@@ -7,7 +7,7 @@ In order to build this project yourself you need to do 5 things.
 
 1. You need UE4.19 which you can download from their launcher: https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
 
-2. You need Visual Studio community 2015: https://go.microsoft.com/fwlink/?LinkId=691978&clcid=0x409 Remember to install the C++ module.
+2. You need Visual Studio community 2017: https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16 Remember to install the C++ module by selecting game development with C++. (More info: https://docs.unrealengine.com/en-US/Programming/Development/VisualStudioSetup/index.html)
 
 3. This git repo: git clone --recurse https://github.com/NoobsDeSroobs/VRVizualizer <Folder name>
 
